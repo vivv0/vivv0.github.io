@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You</title>
+  <style>
+    body {
+      background-color: #fdf6f9;
+      font-family: 'Courier New', monospace;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #ffb6c1;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .balloon {
+      position: absolute;
+      font-size: 3rem;
+      top: 60%;
+      animation: float 4s ease-in-out forwards;
+      cursor: pointer;
+      color: #ff69b4;
+    }
+
+    @keyframes float {
+      to {
+        top: 10%;
+        opacity: 1;
+      }
+    }
+
+    .message {
+      margin-top: 1rem;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    .letter {
+      max-width: 600px;
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px dashed #ff69b4;
+    }
+
+    .pixel-art {
+      margin-top: 1rem;
+      width: 100px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" onclick="releaseBalloon()">🎁</div>
+  <div id="balloonContainer"></div>
+  <div id="messageDisplay" class="message"></div>
+
+  <div class="letter">
+    <p>dear human,</p>
+    <p>you make the void slightly less void-like. that's high praise.</p>
+    <p>from, the ghost who lives in your inbox.</p>
+    <img src="pixel-art-placeholder.png" alt="pixel art" class="pixel-art">
+  </div>
+
+  <script>
+    const messages = [
+      "You're the reason this balloon isn't just full of hot air.",
+      "You're like a human version of ctrl+z—magically helpful.",
+      "You probably smell nice today. Weird, but cool.",
+      "If I had a nickel for every time you made me laugh, I'd have, like, emotional currency.",
+      "You're chaotic in a way that brings order to my nonsense."
+    ];
+
+    function releaseBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.textContent = '🎈';
+      balloon.onclick = () => {
+        const msg = messages[Math.floor(Math.random() * messages.length)];
+        document.getElementById('messageDisplay').textContent = msg;
+        balloon.remove();
+      };
+      document.getElementById('balloonContainer').appendChild(balloon);
+    }
+  </script>
+</body>
+</html>
